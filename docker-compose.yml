@@ -1,11 +1,11 @@
-version: '3'
+version: '3.8'
 services:
   web:
     image: lwan
   db:
     image: mariadb
     ports:
-    - "9090:9090"
+    - "8080:8080"
     environment:
     - MYSQL_ROOT_PASSWORD=password
     - MYSQL_USER=user
