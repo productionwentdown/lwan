@@ -1,7 +1,7 @@
 #
 # Build stage
 #
-FROM alpine:3.10 as build
+FROM alpine:latest as build
 
 # args
 ARG version="master"
