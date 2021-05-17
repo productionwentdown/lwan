@@ -1,9 +1,9 @@
 version: '3.8'
 services:
   web:
-    image: lwan
+    image: productionwentdown/lwan
   db:
-    image: mariadb
+    image: 'mariadb:latest'
     ports:
     - "3306:3306"
     environment:
