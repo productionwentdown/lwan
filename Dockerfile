@@ -50,8 +50,11 @@ LABEL org.label-schema.schema-version="1.0"
 COPY --from=build /build/build/src/bin/lwan/lwan /bin/lwan
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
-# copy default caddyfile
+# copy default configuration
 COPY lwan.conf /etc/lwan.conf
+
+# make a temp folder
+RUN mkdir -p /tmp
 
 # serve from /srv
 WORKDIR /srv
