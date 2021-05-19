@@ -36,6 +36,9 @@ RUN mkdir build \
 #    && ls -l src/bin/lwan \
 #    && upx --ultra-brute src/bin/lwan/lwan
 
+# make a temp folder
+RUN mkdir -p /tmp
+
 #
 # Final image
 #
@@ -53,8 +56,8 @@ COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certifica
 # copy default configuration
 COPY lwan.conf /etc/lwan.conf
 
-# make a temp folder
-RUN mkdir -p /tmp
+# copy empty temp folder
+COPY --from=build /tmp /tmp
 
 # serve from /srv
 WORKDIR /srv
