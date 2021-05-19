@@ -9,14 +9,27 @@ ARG version="master"
 # build root
 WORKDIR /build
 
-RUN apk add --no-cache git upx ca-certificates alpine-sdk cmake zlib-dev
+RUN apk add \
+		git \
+		ca-certificates \
+		alpine-sdk \
+		clang \
+		cmake \
+		zlib-static zlib-dev \
+		lua5.1 lua5.1-dev \
+		linux-headers
 # source
 RUN git clone https://github.com/lpereira/lwan -b ${version} .
 
 # build
 RUN mkdir build \
     && cd build \
-    && cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-static" -DCMAKE_C_FLAGS="-static" \
+    && cmake \
+		.. \
+		-DCMAKE_C_COMPILER=clang \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_EXE_LINKER_FLAGS="-static" \
+		-DCMAKE_C_FLAGS="-static" \
     && make
 # compress and test
 #RUN cd build \
